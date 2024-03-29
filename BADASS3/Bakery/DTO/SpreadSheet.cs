@@ -1,4 +1,4 @@
-namespace Bakery.Model;
+namespace Bakery.DTO;
 
 public class SpreadSheet
 {

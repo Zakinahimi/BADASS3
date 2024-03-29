@@ -1,7 +1,8 @@
-class MainClass
+namespace Bakery.DTO;
+
+public class CompanyOrder
 {
-    public static void Main(string[] args)
-    {
-        Console.WriteLine("Hello, World!");
-    }
+    public int CompanyOrderID { get; set; }
+    public int Quantity { get; set; }
+    public int BakingGoods { get; set; }
 }
