@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Bakery.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,11 @@ namespace Bakery.Model
         [Required]
         public int BakingGoods { get; set; }
 
-        [Required]
+        [ForeignKey("Recipe")]
+        public int RecipeID { get; set; }
+        public virtual Recipe Recipe { get; set; }
+
+
+        public ICollection<SpreadSheet> SpreadSheet { get; set; }
     }
 }

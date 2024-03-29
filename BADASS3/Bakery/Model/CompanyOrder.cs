@@ -14,12 +14,14 @@ namespace Bakery.Model
 
         [Required] 
         public int Quantity { get;}
+
         [Required]
         public string BakingGoods { get; set; }
 
         public ICollection<Supermarket> Supermarket { get; set; }
 
         public ICollection<DispatchSheet> DispatchSheet { get; set; }
+
         public ICollection<SpreadSheet> SpreadSheet { get; set; }
 
     }
