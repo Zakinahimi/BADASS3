@@ -26,5 +26,9 @@ namespace Bakery.Model
 
 
         public ICollection<SpreadSheet> SpreadSheet { get; set; }
+        
+        public ICollection<Batch> Batch { get; set; }
+
+        public ICollection<Schedule> Schedule { get; set; }
     }
 }
