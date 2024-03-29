@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bakery.DTO;
 
 namespace Bakery.Model
 {
@@ -19,5 +20,9 @@ namespace Bakery.Model
         public string Ingredient { get; set; }
 
         public ICollection<SpreadSheet> SpreadSheet { get; set; }
+
+        public ICollection<Batch> Batch { get; set; }
+
+        public ICollection<Schedule> Schedule { get; set; }
     }
 }
