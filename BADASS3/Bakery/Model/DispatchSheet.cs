@@ -15,11 +15,10 @@ namespace Bakery.Model
 
         [ForeignKey("CompanyOrder")]
         public int CompanyOrderID { get; set; }
-        public virtual CompanyOrder CompanyOrder { get; set; }
-
         public string TrackID { get; set; }
         public string Route { get; set; }
         public string DeliveryPlace { get; set; }
         public string Signature { get; set; }
+        public virtual CompanyOrder CompanyOrder { get; set; }
     }
 }

@@ -11,12 +11,15 @@ namespace Bakery.Model
     {
         [Key]
         public int CompanyOrderId { get; set; }
+
         [Required] 
         public int Quantity { get;}
         [Required]
         public string BakingGoods { get; set; }
 
         public ICollection<Supermarket> Supermarket { get; set; }
+
+        public ICollection<DispatchSheet> DispatchSheet { get; set; }
 
     }
 }
