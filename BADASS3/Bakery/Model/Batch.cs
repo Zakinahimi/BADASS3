@@ -30,7 +30,6 @@ namespace Bakery.Model
         public virtual IngredientsStock IngredientsStock { get; set; }
 
 
-
         public ICollection<Schedule> Schedules { get; set; }
     }
 }
