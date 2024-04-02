@@ -25,8 +25,8 @@ namespace Bakery.Controllers
                 BakingGoods = "cake, more cake"
 
             };
-          
-          
+
+            var
 
             var customer = new Customer
             {
