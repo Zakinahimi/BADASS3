@@ -11,7 +11,6 @@ public class BakeryDbContext : DbContext
         : base(options)
     {
     }
-
     public DbSet<DispatchSheet> DispatchSheet => Set<DispatchSheet>();
     public DbSet<SpreadSheet> SpreadSheet => Set<SpreadSheet>();
     public DbSet<Batch> Batch => Set<Batch>();
@@ -25,35 +24,19 @@ public class BakeryDbContext : DbContext
 
 
     // SHADOW PROPERTIES
-    // KENDER IKKE FORSKELLEN PÅ go og ib og hvad de gør
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<SpreadSheet>()
-            .HasKey(go => new { go.SpreadSheetID, go.CompanyOrderId, go.IngredientsStockID, go.BakingGoodsListID });
+            .HasKey(ss => new { ss.SpreadSheetID, ss.CompanyOrderId, ss.IngredientsStockID, ss.BakingGoodsListID });
 
         modelBuilder.Entity<Schedule>()
-            .HasKey(go => new { go.ScheduleID, go.BakingGoodsListID, go.IngredientsStockID, go.BatchID });
+            .HasKey(s => new { s.ScheduleID, s.BakingGoodsListID, s.IngredientsStockID, s.BatchID });
 
         modelBuilder.Entity<Recipe>()
-            .HasKey(go => new { go.BakingGoodsListID, go.IngredientsStockID, go.RecipeID });
+            .HasKey(r => new { r.BakingGoodsListID, r.IngredientsStockID, r.RecipeID });
     }
 
-
-    // det her er gregs:
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //    base.OnModelCreating(modelBuilder);
-
-    //    // Goods + Order
-    //    modelBuilder.Entity<GoodsOrder>()
-    //        .HasKey(go => new { go.GoodsId, go.OrderId });
-
-    //    // Ingredient + Batch
-    //    modelBuilder.Entity<IngredientBatch>()
-    //        .HasKey(ib => new { ib.IngredientId, ib.BatchId });
-    //}
 }
