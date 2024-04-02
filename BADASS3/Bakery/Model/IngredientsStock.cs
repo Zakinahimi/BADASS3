@@ -18,6 +18,9 @@ namespace Bakery.Model
 
         [Required]
         public string Ingredient { get; set; }
+        
+        [Required]
+        public string Allergens { get; set; }
 
         public ICollection<SpreadSheet> SpreadSheet { get; set; }
 
