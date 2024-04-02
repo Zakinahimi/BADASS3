@@ -20,8 +20,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
-  
-</Project>
 
 	<ItemGroup>
 		<Folder Include="Migrations\" />
