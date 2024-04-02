@@ -8,9 +8,7 @@ namespace Bakery.Controllers
 {
     public class SeedController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        private BakeryDbContext _context;
+        public SeedController(BakeryDbContext context) => _context = context;
     }
 }
