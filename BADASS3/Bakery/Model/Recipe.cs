@@ -19,7 +19,7 @@ namespace Bakery.Model
 
         [ForeignKey("Ingredients")]
         public int IngredientsID { get; set; }
-        public virtual Ingredients Ingredients { get; set; }
+        public virtual Ingredient Ingredients { get; set; }
 
     }
 }
