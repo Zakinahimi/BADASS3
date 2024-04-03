@@ -1,10 +1,10 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class Batch
+public class BatchDTO
 {
     [Required]
-    public int BatchID { get; set; }
+    public int BatchDTOID { get; set; }
     [Required]
     public DateTime TargetFinishTime { get; set; }
     [Required]

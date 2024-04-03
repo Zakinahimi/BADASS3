@@ -19,9 +19,9 @@ namespace Bad3.Controllers
 
 		// GET: ALL
 		[HttpGet("GetAllIngredients")]
-		public async Task<ActionResult<IEnumerable<Ingredients>>> GetAllIngredients()
+		public async Task<ActionResult<IEnumerable<IngredientsDTO>>> GetAllIngredients()
 		{
-			var ingredients = await _context.IngredientsStock.Include(i => i.Stock).Select(i => new Ingredients
+			var ingredients = await _context.IngredientsStock.Include(i => i.Stock).Select(i => new IngredientsDTO
 			{
 				Name = i.Name,
 				Quantity = i.Stock.Quantity,
@@ -34,7 +34,7 @@ namespace Bad3.Controllers
 
 		// POST
 		[HttpPost("AddIngredient")]
-		public async Task<ActionResult> AddIngredient([FromBody] Ingredients ingredientDto)
+		public async Task<ActionResult> AddIngredient([FromBody] IngredientsDTO ingredientDto)
 		{
 			if (ingredientDto.Quantity < 0)
 				return BadRequest("negativ number");
@@ -42,13 +42,12 @@ namespace Bad3.Controllers
 			var stock = new Stock
 			{
 				Name = ingredientDto.Name,
-				StockQuantity = ingredientDto.Quantity,
-				Ingredients = new List<Ingredients>() // collection of ingredients
+				Ingredients = new List<Ingredient>() // collection of ingredients
 			};
 
-			var ingredient = new Ingredients // assigning the new vars
+			var ingredient = new Ingredient // assigning the new vars
 			{
-				Ingredient = ingredientDto.Ingredient,
+				Name = ingredientDto.Name,
 				Quantity = stock,
 				Allergens = ingredientDto.Allergens
 			};
@@ -64,7 +63,7 @@ namespace Bad3.Controllers
 
 		// PUT
 		[HttpPut("UpdateIngredient")]
-		public async Task<IActionResult> UpdateIngredient([FromBody] Ingredients ingredientDto)
+		public async Task<IActionResult> UpdateIngredient([FromBody] IngredientsDTO ingredientDto)
 		{
 			if (ingredientDto.Quantity < 0)
 				return BadRequest("negativ number");
