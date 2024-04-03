@@ -20,6 +20,7 @@ public class BakeryDbContext : DbContext
     public DbSet<Supermarket> Supermarket => Set<Supermarket>();
     public DbSet<Schedule> Schedule => Set<Schedule>();
     public DbSet<Recipe> Recipe => Set<Recipe>();
+    public DbSet<Stock> Stock => Set<Stock>();
 
 
 

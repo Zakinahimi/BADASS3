@@ -7,5 +7,5 @@ public class Stock
     [Required]
     public string StockId { get; set; }
     [Required]
-    public int Quantity { get; set; }
+    public int StockQuantity { get; set; }
 }

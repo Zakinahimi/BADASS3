@@ -1,0 +1,36 @@
+﻿using Bakery.DTO;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Bakery.Model
+{
+    public class Ingredient
+    {
+        [Key]
+        public int IngredientsID { get; set; }
+
+        [Required]
+        public int Quantity { get; set; }
+
+        [Required]
+        public string Ingridient { get; set; }
+
+        [Required]
+        public string Allergens { get; set; }
+
+
+        public ICollection<Stock> Stocks { get; set; }
+
+        public ICollection<SpreadSheet> SpreadSheets { get; set; }
+
+        public ICollection<Recipe> Recipes { get; set; }
+
+        public ICollection<Schedule> Schedules { get; set; }
+    }
+}
