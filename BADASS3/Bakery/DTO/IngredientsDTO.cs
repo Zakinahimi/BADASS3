@@ -2,12 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bakery.DTO;
 
-public class Ingredients
+public class IngredientsDTO
 {
     [Required]
     public int Quantity { get; set; }
     [Required]
-    public int IngredientsID{ get; set; }
+    public int IngredientsDTOID{ get; set; }
     [Required]
     public string Name{ get; set; }
     [Required]

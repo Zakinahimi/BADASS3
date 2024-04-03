@@ -1,10 +1,10 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class Supermarket
+public class SupermarketDTO
 {
     [Required]
-    public int SupermarketID { get; set; }
+    public int SupermarketDTOID { get; set; }
     [Required]
     public string Name  { get; set; }
     [Required]

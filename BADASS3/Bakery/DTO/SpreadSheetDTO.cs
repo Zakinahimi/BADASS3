@@ -1,10 +1,10 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class SpreadSheet
+public class SpreadSheetDTO
 {
     [Required]
-    public int SpreadSheetID { get; set; }
+    public int SpreadSheetDTOID { get; set; }
     [Required]
     public int CompanyOrderID { get; set; }
     [Required]

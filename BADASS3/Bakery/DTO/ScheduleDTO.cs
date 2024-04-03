@@ -1,10 +1,10 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class Schedule
+public class ScheduleDTO
 {
     [Required]
-    public int ScheduleID { get; set; }
+    public int ScheduleDTOID { get; set; }
     [Required]
     public int BakingGoodsListID { get; set; }
     [Required]
