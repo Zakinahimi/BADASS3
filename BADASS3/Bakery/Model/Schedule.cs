@@ -11,8 +11,11 @@ namespace Bakery.Model
 {
     public class Schedule
     {
+        //PRIMARY
         [Key]
         public int ScheduleID { get; set; }
+
+        //
 
         [ForeignKey("BakingGoodsList")]
         public int BakingGoodsListID { get; set; }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bakery.Model
 {
-    public class Ingredients
+    public class Ingredient
     {
         [Key]
         public int IngredientsID { get; set; }
@@ -19,7 +19,7 @@ namespace Bakery.Model
         public int Quantity { get; set; }
 
         [Required]
-        public string Ingredient { get; set; }
+        public string Ingridient { get; set; }
 
         [Required]
         public string Allergens { get; set; }
