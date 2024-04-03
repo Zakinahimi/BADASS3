@@ -8,28 +8,35 @@ namespace Bakery.Model
 {
     public class Batch
     {
+
+        //PRIMARY KEY
         [Key]
         public int BatchID { get; set; }
 
-        [Required]
-        public DateTime StartTime { get; set; }
 
-        [Required]
-        public DateTime TargetFinishTime { get; set; }
-
-        [Required]
-        public DateTime ActualFinishTime { get; set; }
-
+        //FOREIGN KEYS
 
         [ForeignKey("BakingGoodsList")]
         public int BakingGoodsListID { get; set; }
         public virtual BakingGoodsList BakingGoodsList { get; set; }
 
-        [ForeignKey("IngredientsStock")]
-        public int IngredientsStockID { get; set; }
-        public virtual IngredientsStock IngredientsStock { get; set; }
+        [ForeignKey("Ingredients")]
+        public int IngredientsID { get; set; }
+        public virtual Ingredients Ingredients { get; set; }
 
 
+        //REQURIED
+        [Required]
+        public DateTime TargetFinishTime { get; set; }
+
+        [Required]
+        public DateTime StartTime { get; set; }
+
+        [Required]
+        public DateTime ActualFinishTime { get; set; }
+
+
+        //ICollection
         public ICollection<Schedule> Schedules { get; set; }
     }
 }
