@@ -17,9 +17,9 @@ namespace Bakery.Model
         public int BakingGoodsListID { get; set; }
         public virtual BakingGoodsList BakingGoodsList { get; set; }
 
-        [ForeignKey("IngredientsStock")]
-        public int IngredientsStockID { get; set; }
-        public virtual IngredientsStock IngredientsStock { get; set; }
+        [ForeignKey("Ingredients")]
+        public int IngredientsID { get; set; }
+        public virtual Ingredients Ingredients { get; set; }
 
     }
 }
