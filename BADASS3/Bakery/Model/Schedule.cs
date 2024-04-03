@@ -15,18 +15,19 @@ namespace Bakery.Model
         [Key]
         public int ScheduleID { get; set; }
 
-        //
-
+        //FOREIGN
         [ForeignKey("BakingGoodsList")]
         public int BakingGoodsListID { get; set; }
         public virtual BakingGoodsList BakingGoodsList { get; set; }
+
 
         [ForeignKey("Batch")]
         public int BatchID { get; set; }
         public virtual Batch Batch { get; set; }
 
-        [ForeignKey("IngredientsStock")]
-        public int IngredientsStockID { get; set; }
-        public virtual IngredientsStock IngredientsStock { get; set; }
+
+        [ForeignKey("Ingredient")]
+        public int IngredientsID { get; set; }
+        public virtual Ingredient Ingredients { get; set; }
     }
 }
