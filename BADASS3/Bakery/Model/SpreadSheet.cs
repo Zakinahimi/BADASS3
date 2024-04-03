@@ -12,21 +12,23 @@ namespace Bakery.Model
 {
     public class SpreadSheet
     {
+        //PRIMARY
         [Key]
         public int SpreadSheetID { get; set; }
 
+
+        //FOREIGN
         [ForeignKey("CompanyOrder")]
-        public int CompanyOrderId { get; set; }
+        public int CompanyOrderID { get; set; }
         public virtual CompanyOrder CompanyOrder { get; set; }
 
-        [ForeignKey("IngredientsStock")]
-        public int IngredientsStockID { get; set; }
-        public virtual IngredientsStock IngredientsStock { get; set; }
+        [ForeignKey("Ingredient")]
+        public int IngredientsID { get; set; }
+        public Ingredient Ingredient { get; set; }
 
         [ForeignKey("BakingGoodsList")]
         public int BakingGoodsListID { get; set; }
-        public virtual BakingGoodsList BakingGoodsList { get; set; }
-
+        public BakingGoodsList BakingGoodsList { get; set; }
 
     }
 }
