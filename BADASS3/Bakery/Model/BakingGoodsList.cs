@@ -11,20 +11,25 @@ namespace Bakery.Model
 {
     public class BakingGoodsList
     {
+        //PRIMARY
         [Key]
         public int BakingGoodsListID { get; set; }
 
-        [Required]
-        public int Quantity { get; set; }
-
-        [Required]
-        public int BakingGoods { get; set; }
-
+        //FOREIGN
         [ForeignKey("Recipe")]
         public int RecipeID { get; set; }
         public virtual Recipe Recipe { get; set; }
 
 
+        //REQUIRED
+        [Required]
+        public int Quantity { get; set; }
+
+        [Required]
+        public string BakingGoods { get; set; }
+
+
+        //ICollection
         public ICollection<SpreadSheet> SpreadSheet { get; set; }
         
         public ICollection<Batch> Batch { get; set; }
