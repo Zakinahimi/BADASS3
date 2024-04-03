@@ -19,7 +19,9 @@ namespace Bakery.Model
         //FOREIGN
         [ForeignKey("Ingredients")]
         public int IngredientsID { get; set; }
-        public virtual Ingredient Ingredients { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
+
+        // public virtual Ingredient Ingredient { get; set; }
 
 
         //REQUIRED

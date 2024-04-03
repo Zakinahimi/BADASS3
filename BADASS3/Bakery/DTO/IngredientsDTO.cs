@@ -7,7 +7,7 @@ public class IngredientsDTO
     [Required]
     public int Quantity { get; set; }
     [Required]
-    public int IngredientsDTOID{ get; set; }
+    public int IngredientsID{ get; set; }
     [Required]
     public string Name{ get; set; }
     [Required]
