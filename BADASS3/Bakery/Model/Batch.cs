@@ -28,8 +28,6 @@ namespace Bakery.Model
         [ForeignKey("IngredientsStock")]
         public int IngredientsStockID { get; set; }
         public virtual IngredientsStock IngredientsStock { get; set; }
-
-
         public ICollection<Schedule> Schedules { get; set; }
     }
 }

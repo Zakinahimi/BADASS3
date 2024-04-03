@@ -50,9 +50,6 @@ namespace Bakery.Controllers
     }
 }
 
-
-
-
 namespace Bad3.Controllers
 {
 

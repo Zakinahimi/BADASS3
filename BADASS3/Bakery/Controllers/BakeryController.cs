@@ -19,14 +19,13 @@ namespace Bad3.Controllers
 
 		// GET: ALL
 		[HttpGet("GetAllIngredients")]
-		public async Task<ActionResult<IEnumerable<IngredientStock>>> GetAllIngredients()
+		public async Task<ActionResult<IEnumerable<Ingredients>>> GetAllIngredients()
 		{
-			var ingredients = await _context.IngredientsStock.Include(i => i.Ingredient).Select(i => new IngredientStock
+			var ingredients = await _context.IngredientsStock.Include(i => i.Stock).Select(i => new Ingredients
 			{
-                IngredientStockID = i.IngredientsStockID,
-				Ingredient = i.Ingredient,
-				Quantity = i.Quantity,
-                Allergens = i.Allergens
+				Name = i.Name,
+				Quantity = i.Stock.Quantity,
+				Allergens = i.Allergens,
 				
 			}).ToListAsync();
 
@@ -35,42 +34,49 @@ namespace Bad3.Controllers
 
 		// POST
 		[HttpPost("AddIngredient")]
-		public async Task<ActionResult> AddIngredient([FromBody] IngredientsStock ingredientStock)
+		public async Task<ActionResult> AddIngredient([FromBody] Ingredients ingredientDto)
 		{
-			if (ingredientStock.Quantity < 0)
+			if (ingredientDto.Quantity < 0)
 				return BadRequest("negativ number");
 
-			var ingredient = new IngredientsStock
+			var stock = new Stock
 			{
-				IngredientsStockID = ingredientStock.IngredientsStockID,
-				Quantity = ingredientStock.Quantity,
-				Ingredient = new List<IngredientsStock>() // collection of ingredients
+				Name = ingredientDto.Name,
+				StockQuantity = ingredientDto.Quantity,
+				Ingredients = new List<Ingredients>() // collection of ingredients
 			};
 
-			ingredient.Ingredient.Add(ingredient)
+			var ingredient = new Ingredients // assigning the new vars
+			{
+				Ingredient = ingredientDto.Ingredient,
+				Quantity = stock,
+				Allergens = ingredientDto.Allergens
+			};
 
-			_context.IngredientsStock.Add(ingredient); // add to database
+			stock.Ingredients.Add(ingredient);
+
+			_context.Stock.Add(stock); // add to database
 			await _context.SaveChangesAsync();
 
-			return Ok($"{ingredientStock.IngredientsStockID} added with quantity {ingredientStock.Quantity} and allergens {ingredientStock.Allergens}");
+			return Ok($"{ingredientDto.Name} added with quantity {ingredientDto.Quantity} and allergens {ingredientDto.Allergens}");
 		}
 
 
 		// PUT
 		[HttpPut("UpdateIngredient")]
-		public async Task<IActionResult> UpdateIngredient([FromBody] IngredientStock ingredientDto)
+		public async Task<IActionResult> UpdateIngredient([FromBody] Ingredients ingredientDto)
 		{
 			if (ingredientDto.Quantity < 0)
 				return BadRequest("negativ number");
 
-			var stock = await _context.IngredientsStock
-				.Include(s => s.Ingredient)
-				.FirstOrDefaultAsync(s => s.Ingredient.Any(i => i.Ingredient == ingredientDto.Ingredient));
+			var stock = await _context.Stock
+				.Include(s => s.Ingredients)
+				.FirstOrDefaultAsync(s => s.Ingredients.Any(i => i.Name == ingredientDto.Name));
 
 			if (stock == null)
-				return NotFound($"{ingredientDto.IngredientStockID} not found");
+				return NotFound($"{ingredientDto.Name} not found");
 
-			var ingredient = stock.Ingredients.FirstOrDefault(i => i.Name == ingredientDto.Ingredient);
+			var ingredient = stock.Ingredients.FirstOrDefault(i => i.Name == ingredientDto.Name);
 			if (ingredient != null)
 			{
 				stock.Quantity = ingredientDto.Quantity; // update quant
@@ -79,7 +85,7 @@ namespace Bad3.Controllers
 				return Ok($"{ingredient.Name} quantity updated to {ingredientDto.Quantity} and allergens to {ingredientDto.Allergens}");
 			}
 
-			return NotFound($"{ingredientDto.Ingredient} not found");
+			return NotFound($"{ingredientDto.Name} not found");
 		}
 
 		// DELETE
@@ -87,8 +93,8 @@ namespace Bad3.Controllers
 		public async Task<IActionResult> DeleteIngredient([FromQuery] string name)
 		{
 			var ingredient = await _context.IngredientsStock
-										  .Include(i => i.Ingredient)
-										  .SingleOrDefaultAsync(i => i.Ingredient == name);
+										  .Include(i => i.Stock)
+										  .SingleOrDefaultAsync(i => i.Name == name);
 
 			if (ingredient == null)
 			{
@@ -98,7 +104,7 @@ namespace Bad3.Controllers
 			_context.IngredientsStock.Remove(ingredient);
 
 			// see if others are linked to same stock
-			bool hasOtherIngredients = await _context.IngredientsStock.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientsStockID != ingredient.IngredientsStockID);
+			bool hasOtherIngredients = await _context.IngredientsStock.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientId != ingredient.IngredientId);
 			if (!hasOtherIngredients)
 			{
 				var stock = await _context.Stock.FindAsync(ingredient.StockId);
