@@ -40,7 +40,7 @@ namespace Bakery.Controllers
         public async Task<ActionResult> GetOrderDetails(int CompanyOrderId)
         {
             var orderDetails = await _context.CompanyOrder
-                .Where(o => o.CompanyOrderId == CompanyOrderId)
+                .Where(o => o.CompanyOrderID == CompanyOrderId)
                 .Include(o=> o.DeliveryPlace)
                 .Select(o => new {Address = o.DispatchSheet.DeliveryPlace, o})
                 .FirstOrDefaultAsync();
