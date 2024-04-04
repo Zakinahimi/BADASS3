@@ -1,7 +1,6 @@
 ﻿using Bakery.Database;
 using Bakery.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks; // Added using directive for Task
 
 namespace Bakery.Controllers
 {
@@ -14,48 +13,93 @@ namespace Bakery.Controllers
             _context = context;
         }
 
-        [HttpPost] // Moved above the method declaration
+        [HttpPost] 
 
         public async Task<IActionResult> SeedDb()
         {
             
             var CompanyOrder = new CompanyOrder
             {
-
+                BakingGoods = "cake 1, cake 2",
+                // Quantity = 1  ???
             };
 
             var Supermarket = new Supermarket
             {
-
+                Name = "Netto"
             };
+            if (!_context.Supermarket.Any(c => c.SupermarketID == Supermarket.SupermarketID))
+            {
+                await _context.Supermarket.AddAsync(Supermarket);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                Console.WriteLine("Supermarket already exists.");
+            }
 
             var DispatchSheet = new DispatchSheet
             {
-
+                 Driver = "ZAKIII",
+                 TrackID = 1,   
+                 DeliverPlace = "yep",
+                 Signature = "yes"
             };
 
             var BakingGoodsList = new BakingGoodsList
             { 
-            
+                Quantity = 1,   
+                BakingGoods = "mad"
             };
+            if (!_context.BakingGoodsList.Any(e => e.BakingGoodsListID == BakingGoodsList.BakingGoodsListID))
+            {
+                await _context.BakingGoodsList.AddAsync(BakingGoodsList);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                Console.WriteLine("BakingGoodsList already exists.");
+            }
 
             var Batch = new Batch
             { 
-            
+                TargetFinishTime = new DateTime(2024, 4, 3, 11, 30, 00),
+                StartTime = DateTime.Now,
+                ActualFinishTime = new DateTime(2024, 4, 3, 12, 17, 11),
             };
+            if (!_context.Batch.Any(e => e.BatchID == Batch.BatchID))
+            {
+                await _context.Batch.AddAsync(Batch);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                Console.WriteLine("batch already exists.");
+            }
 
             var Ingredients = new Ingredient
             { 
-            
+                Quantity = 1,
+                Name = "Sugar",
+                Allergens = "die"
             };
 
             var Stock = new Stock
             { 
-            
+                Name = "IDK"
             };
 
+            if (!_context.Stock.Any(e => e.StockId == Stock.StockId))
+            {
+                await _context.Stock.AddAsync(Stock);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                Console.WriteLine("stock already exists.");
+            }
 
-            return Ok(); // Placeholder return statement
+            return Ok(); 
         }
     }
 }
