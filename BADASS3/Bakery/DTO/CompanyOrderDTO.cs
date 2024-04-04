@@ -9,5 +9,5 @@ public class CompanyOrderDTO
     [Required]
     public int Quantity { get; set; }
     [Required]
-    public int BakingGoods { get; set; }
+    public string BakingGoods { get; set; }
 }
