@@ -21,7 +21,7 @@ namespace Bakery.Controllers
             var CompanyOrder = new CompanyOrder
             {
                 BakingGoods = "cake 1, cake 2",
-                // Quantity = 1  ???
+                Quantity = 1 
             };
 
             var Supermarket = new Supermarket

@@ -16,7 +16,7 @@ namespace Bakery.Model
 
         //REQUIRED
         [Required] 
-        public int Quantity { get;}
+        public int Quantity { get; set; }
 
         [Required]
         public string BakingGoods { get; set; }
