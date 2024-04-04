@@ -24,8 +24,8 @@ namespace Bakery.Model
 
 
         //ICollection
-        public ICollection<Supermarket> Supermarket { get; set; }
-        public ICollection<CompanyOrder> CompanyOrder { get; set; }
-        public ICollection<SpreadSheet> SpreadSheet { get; set; }
+        public ICollection<Supermarket> Supermarkets { get; set; }
+        public ICollection<CompanyOrder> CompanyOrders { get; set; }
+        public ICollection<SpreadSheet> SpreadSheets { get; set; }
     }
 }
