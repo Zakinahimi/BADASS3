@@ -4,8 +4,6 @@ using Bakery.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using CompanyOrder = Bakery.DTO.CompanyOrder;
-using DispatchSheet = Bakery.DTO.DispatchSheet;
 
 namespace Bakery.Controllers
 {
