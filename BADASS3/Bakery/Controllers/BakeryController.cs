@@ -21,21 +21,20 @@ namespace Bad3.Controllers
         }
 
         // GET: ALL
-        [HttpGet("GetAllIngredients")]
-        public async Task<ActionResult<IEnumerable<IngredientsDTO>>> GetAllIngredients()
-        {
-            var ingredients = await _context.IngredientsStock
-                .Include(i => i.Stock)
-                .Select(i => new IngredientsDTO
-                {
-                    Name = i.Name,
-                    Quantity = i.Stock.Quantity,
-                    Allergens = i.Allergens,
+    [HttpGet("GetAllIngredients")]
+    public async Task<ActionResult<IEnumerable<IngredientsDTO>>> GetAllIngredients()
+    {
+        var ingredients = await _context.Ingredient.Include(i => i.Stocks).Select(i => new IngredientsDTO
+            {
+                Name = i.Name,
+                Quantity = i.Stock.Ingredients,
+                Allergens = i.Allergens,
+            })
+            .ToListAsync();
 
-                }).ToListAsync();
+        return Ok(ingredients);
+    }
 
-            return Ok(ingredients);
-        }
 
         // POST
         [HttpPost("AddIngredient")]
@@ -96,8 +95,8 @@ namespace Bad3.Controllers
         [HttpDelete("DeleteIngredient")]
         public async Task<IActionResult> DeleteIngredient([FromQuery] string name)
         {
-            var ingredient = await _context.IngredientsStock
-                                              .Include(i => i.Stock)
+            var ingredient = await _context.Ingredient
+                                              .Include(i => i.Stocks)
                                               .SingleOrDefaultAsync(i => i.Name == name);
 
             if (ingredient == null)
@@ -105,10 +104,10 @@ namespace Bad3.Controllers
                 return NotFound($"{name} not found");
             }
 
-            _context.IngredientsStock.Remove(ingredient);
+            _context.Ingredient.Remove(ingredient);
 
             // see if others are linked to same stock
-            bool hasOtherIngredients = await _context.IngredientsStock.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientId != ingredient.IngredientId);
+            bool hasOtherIngredients = await _context.Ingredient.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientsID != ingredient.IngredientsID);
             if (!hasOtherIngredients)
             {
                 var stock = await _context.Stock.FindAsync(ingredient.StockId);
