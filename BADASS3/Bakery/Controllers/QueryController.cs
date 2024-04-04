@@ -22,13 +22,13 @@ namespace Bakery.Controllers
         // Query 1: Get the current stock
         [HttpGet("GetCurrectStock")]
 
-        public async Task<ActionResult<IEnumerable<IngredientStock>>> GetCurrentStock()
+        public async Task<ActionResult<IEnumerable<StockDTO>>> GetCurrentStock()
         {
-            var stocks = await _context.IngredientsStock
-                .Select(s => new IngredientStock
+            var stocks = await _context.Stock
+                .Select(s => new StockDTO
                 {
-                    IngredientStockID = s.IngredientsStockID,
-                    Quantity = s.Quantity
+                    StockID = s.StockID,
+                    Name = s.Name,
                 }).ToListAsync();
 
             return Ok(stocks);
@@ -41,8 +41,14 @@ namespace Bakery.Controllers
         {
             var orderDetails = await _context.CompanyOrder
                 .Where(o => o.CompanyOrderId == CompanyOrderId)
-                .Include(o=>o.DispatchSheet)
-                .Select(o => new {Address = o.DispatchSheet.DeliveryPlace, o.})
+                .Include(o=> o.DeliveryPlace)
+                .Select(o => new {Address = o.DispatchSheet.DeliveryPlace, o})
+                .FirstOrDefaultAsync();
+
+            if (orderDetails == null)
+                return NotFound($"Details not found for order ID: {CompanyOrderId}");
+
+            return Ok(orderDetails);
         }
 
     }
@@ -73,7 +79,7 @@ namespace Bad3.Controllers
         [HttpGet("GetGoodsInOrder/{orderId from GoodsOrder}")]
         public async Task<ActionResult> GetGoodsInOrder(int orderId)
         {
-            var goodsList = await _context.GoodsOrder
+            var goodsList = await _context.CompanyOrder
                 .Where(go => go.OrderId == orderId)
                 .Include(go => go.Goods)
                 .Select(go => new { go.Goods.GoodName, go.Quantity })
@@ -120,7 +126,7 @@ namespace Bad3.Controllers
         [HttpGet("GetAllGoodsQuantities")]
         public async Task<ActionResult> GetAllGoodsQuantities()
         {
-            var goodsQuantities = await _context.GoodsOrder
+            var goodsQuantities = await _context.CompanyOrder
                 .Include(go => go.Goods)
                 .GroupBy(go => go.Goods.GoodName)
                 .Select(g => new { GoodName = g.Key, TotalQuantity = g.Sum(go => go.Quantity) })
