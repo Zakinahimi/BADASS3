@@ -32,6 +32,9 @@ namespace Bakery.Model
         public string DeliveryPlace { get; set; }
 
         [Required]
+        public DateTime DeliveryDate { get; set; }
+
+        [Required]
         public string Signature { get; set; }
     }
 }
