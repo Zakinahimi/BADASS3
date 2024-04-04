@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 public class BatchDTO
 {
     [Required]
-    public int BatchDTOID { get; set; }
+    public int BatchID { get; set; }
     [Required]
     public DateTime TargetFinishTime { get; set; }
     [Required]

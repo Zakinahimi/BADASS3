@@ -5,7 +5,7 @@ namespace Bakery.DTO;
 public class StockDTO
 {
     [Required]
-    public string StockDTOId { get; set; }
+    public string StockId { get; set; }
     [Required]
     public int Name { get; set; }
 }

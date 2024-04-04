@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 public class DispatchSheetDTO
 {
     [Required]
-    public int DispatchSheetDTOID { get; set; }
+    public int DispatchSheetID { get; set; }
     [Required]
     public int TrackID { get; set; }
     [Required]

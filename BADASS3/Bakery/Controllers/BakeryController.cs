@@ -27,7 +27,7 @@ namespace Bad3.Controllers
         var ingredients = await _context.Ingredient.Include(i => i.Stocks).Select(i => new IngredientsDTO
             {
                 Name = i.Name,
-                Quantity = i.Stock.Ingredients,
+                Quantity = i.Quantity,
                 Allergens = i.Allergens,
             })
             .ToListAsync();

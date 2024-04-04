@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 public class SupermarketDTO
 {
     [Required]
-    public int SupermarketDTOID { get; set; }
+    public int SupermarketID { get; set; }
     [Required]
     public string Name  { get; set; }
     [Required]
