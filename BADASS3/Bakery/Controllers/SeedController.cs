@@ -84,11 +84,11 @@ namespace Bakery.Controllers
                 Allergens = "die"
             };
 
+
             var Stock = new Stock
             { 
                 Name = "IDK"
             };
-
             if (!_context.Stock.Any(e => e.StockId == Stock.StockId))
             {
                 await _context.Stock.AddAsync(Stock);
@@ -99,7 +99,7 @@ namespace Bakery.Controllers
                 Console.WriteLine("stock already exists.");
             }
 
-            return Ok(); 
+            return CreatedAtAction(nameof(SeedDb), new { id = Supermarket.SupermarketID }, Supermarket);
         }
     }
 }
