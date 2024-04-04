@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bakery.DTO;
 
-public class Ingredients
+public class IngredientsDTO
 {
     [Required]
     public int Quantity { get; set; }

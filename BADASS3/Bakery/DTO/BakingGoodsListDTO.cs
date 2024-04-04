@@ -1,7 +1,7 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class BakingGoodsList
+public class BakingGoodsListDTO
 {
     [Required]
     public int BakingGoodsListID { get; set; }

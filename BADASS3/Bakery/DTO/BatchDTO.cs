@@ -1,7 +1,7 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class Batch
+public class BatchDTO
 {
     [Required]
     public int BatchID { get; set; }

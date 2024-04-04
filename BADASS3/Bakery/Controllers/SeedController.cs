@@ -1,7 +1,6 @@
 ﻿using Bakery.Database;
 using Bakery.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.ObjectModel;
 
 namespace Bakery.Controllers
 {
@@ -14,91 +13,63 @@ namespace Bakery.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost] 
+
         public async Task<IActionResult> SeedDb()
         {
-
-
+            
             var CompanyOrder = new CompanyOrder
             {
-                Quantity = 40,
-                BakingGoods = "cake, more cake"
-
+                BakingGoods = "cake 1, cake 2",
+                Quantity = 1 
             };
 
-            var
-
-            var customer = new Customer
+            var Supermarket = new Supermarket
             {
-                CustomerName = "Hej",
-                Orders = new Collection<Order>()
-            {
-                order
-            }
+                Name = "Netto"
             };
-            if (!_context.Customer.Any(c => c.CustomerID == customer.CustomerID))
+            if (!_context.Supermarket.Any(c => c.SupermarketID == Supermarket.SupermarketID))
             {
-                await _context.Customer.AddAsync(customer);
+                await _context.Supermarket.AddAsync(Supermarket);
                 await _context.SaveChangesAsync();
             }
             else
             {
-                Console.WriteLine("Customer already exists.");
+                Console.WriteLine("Supermarket already exists.");
             }
 
-            var good = new Goods
+            var DispatchSheet = new DispatchSheet
             {
-                GoodName = "Strawberry Cake",
-                Validity = new DateTime(2024, 8, 18, 22, 30, 0),
-                Quantity = 40
+                 Driver = "ZAKIII",
+                 TrackID = 1,   
+                 DeliverPlace = "yep",
+                 Signature = "yes"
             };
-            if (!_context.Goods.Any(e => e.GoodsId == good.GoodsId))
+
+            var BakingGoodsList = new BakingGoodsList
+            { 
+                Quantity = 1,   
+                BakingGoods = "mad"
+            };
+            if (!_context.BakingGoodsList.Any(e => e.BakingGoodsListID == BakingGoodsList.BakingGoodsListID))
             {
-                await _context.Goods.AddAsync(good);
+                await _context.BakingGoodsList.AddAsync(BakingGoodsList);
                 await _context.SaveChangesAsync();
             }
             else
             {
-                Console.WriteLine("Good already exists.");
+                Console.WriteLine("BakingGoodsList already exists.");
             }
 
-            var delivery = new Delivery
-            {
-                TrackId = "1",
-                Address = "Gammelvej 4",
-                Coordinates = "18.299803, -64.825582",
-                Date = new DateTime(2024, 4, 1, 12, 45, 0),
-                Order = order // order use address
-            };
-
-            var driver = new Driver
-            {
-                Name = "Bossman",
-                Deliveries = new List<Delivery>
-            {
-                delivery
-            }
-            };
-            if (!_context.Driver.Any(e => e.DriverId == driver.DriverId))
-            {
-                await _context.Driver.AddAsync(driver);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                Console.WriteLine("Driver already exists.");
-            }
-
-            var batch = new Batch
-            {
+            var Batch = new Batch
+            { 
+                TargetFinishTime = new DateTime(2024, 4, 3, 11, 30, 00),
                 StartTime = DateTime.Now,
-                EndTime = new DateTime(2024, 3, 22, 12, 30, 0),
-                Delay = 6
-
+                ActualFinishTime = new DateTime(2024, 4, 3, 12, 17, 11),
             };
-            if (!_context.Batch.Any(e => e.BatchId == batch.BatchId))
+            if (!_context.Batch.Any(e => e.BatchID == Batch.BatchID))
             {
-                await _context.Batch.AddAsync(batch);
+                await _context.Batch.AddAsync(Batch);
                 await _context.SaveChangesAsync();
             }
             else
@@ -106,24 +77,21 @@ namespace Bakery.Controllers
                 Console.WriteLine("batch already exists.");
             }
 
-            var ingredient = new Ingredient
-            {
+            var Ingredients = new Ingredient
+            { 
+                Quantity = 1,
                 Name = "Sugar",
-                Allergens = "Nuts",
-                StockId = 1
+                Allergens = "die"
             };
 
-            var stock = new Stock
-            {
-                Name = "Bakery stock",
-                Ingredients = new List<Ingredient>
-            {
-                ingredient
-            }
+
+            var Stock = new Stock
+            { 
+                Name = "IDK"
             };
-            if (!_context.Stock.Any(e => e.StockId == stock.StockId))
+            if (!_context.Stock.Any(e => e.StockId == Stock.StockId))
             {
-                await _context.Stock.AddAsync(stock);
+                await _context.Stock.AddAsync(Stock);
                 await _context.SaveChangesAsync();
             }
             else
@@ -131,49 +99,7 @@ namespace Bakery.Controllers
                 Console.WriteLine("stock already exists.");
             }
 
-            #region Relations
-
-            var goodsOrder = new GoodsOrder
-            {
-                GoodsId = good.GoodsId,
-                OrderId = order.OrderId,
-                Quantity = 20
-            };
-
-            if (!_context.GoodsOrder.Any(e => e.GoodsId == goodsOrder.GoodsId && e.OrderId == goodsOrder.OrderId))
-            {
-                await _context.GoodsOrder.AddAsync(goodsOrder);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                Console.WriteLine("GoodsOrder already exists.");
-            }
-
-            var ingredientBatch = new IngredientBatch
-            {
-                BatchId = 1,
-                IngredientId = ingredient.IngredientId,
-                Quantity = 80
-            };
-
-            if (!_context.IngredientBatch.Any(e => e.BatchId == ingredientBatch.BatchId) &&
-                !_context.IngredientBatch.Any(e => e.IngredientId == ingredientBatch.IngredientId))
-            {
-                await _context.IngredientBatch.AddAsync(ingredientBatch);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                Console.WriteLine("ignreindbatb already exists.");
-            }
-
-            #endregion
-
-            return CreatedAtAction(nameof(SeedDb), new { id = customer.CustomerID }, customer);
+            return CreatedAtAction(nameof(SeedDb), new { id = Supermarket.SupermarketID }, Supermarket);
         }
-
-
     }
-
 }

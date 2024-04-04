@@ -1,7 +1,7 @@
 namespace Bakery.DTO;
 using System.ComponentModel.DataAnnotations;
 
-public class DispatchSheet
+public class DispatchSheetDTO
 {
     [Required]
     public int DispatchSheetID { get; set; }

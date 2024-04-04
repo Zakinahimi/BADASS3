@@ -16,7 +16,7 @@ public class BakeryDbContext : DbContext
     public DbSet<Batch> Batch => Set<Batch>();
     public DbSet<BakingGoodsList> BakingGoodsList => Set<BakingGoodsList>();
     public DbSet<CompanyOrder> CompanyOrder => Set<CompanyOrder>();
-    public DbSet<IngredientsStock> IngredientsStock => Set<IngredientsStock>();
+    public DbSet<Ingredient> Ingredient => Set<Ingredient>();
     public DbSet<Supermarket> Supermarket => Set<Supermarket>();
     public DbSet<Schedule> Schedule => Set<Schedule>();
     public DbSet<Recipe> Recipe => Set<Recipe>();

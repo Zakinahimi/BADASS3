@@ -19,7 +19,7 @@ namespace Bakery.Model
         public int Quantity { get; set; }
 
         [Required]
-        public string Ingridient { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public string Allergens { get; set; }

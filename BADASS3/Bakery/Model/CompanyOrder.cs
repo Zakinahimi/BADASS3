@@ -9,20 +9,22 @@ namespace Bakery.Model
 {
     public class CompanyOrder
     {
+        //PRIMARY
         [Key]
         public int CompanyOrderId { get; set; }
 
+
+        //REQUIRED
         [Required] 
-        public int Quantity { get;}
+        public int Quantity { get; set; }
 
         [Required]
         public string BakingGoods { get; set; }
 
-        public ICollection<Supermarket> Supermarket { get; set; }
 
-        public ICollection<DispatchSheet> DispatchSheet { get; set; }
-
-        public ICollection<SpreadSheet> SpreadSheet { get; set; }
-
+        //ICollection
+        public ICollection<Supermarket> Supermarkets { get; set; }
+        public ICollection<CompanyOrder> CompanyOrders { get; set; }
+        public ICollection<SpreadSheet> SpreadSheetss { get; set; }
     }
 }
