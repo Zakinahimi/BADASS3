@@ -43,7 +43,7 @@ namespace Bakery.Controllers
                  Driver = "ZAKIII",
                  TrackID = 1,   
                  DeliveryPlace = "yep",
-                 DeliveryDate = new DateTime(2024, 4, 5)
+                 DeliveryDate = new DateTime(2024, 4, 5),
                  Signature = "yes"
             };
 
