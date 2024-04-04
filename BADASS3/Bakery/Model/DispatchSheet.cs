@@ -29,7 +29,7 @@ namespace Bakery.Model
         public string Driver { get; set; }
 
         [Required]
-        public string DeliverPlace { get; set; }
+        public string DeliveryPlace { get; set; }
 
         [Required]
         public string Signature { get; set; }

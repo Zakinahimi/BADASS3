@@ -89,7 +89,7 @@ namespace Bakery.Controllers
             { 
                 Name = "IDK"
             };
-            if (!_context.Stock.Any(e => e.StockId == Stock.StockId))
+            if (!_context.Stock.Any(e => e.StockID == Stock.StockID))
             {
                 await _context.Stock.AddAsync(Stock);
                 await _context.SaveChangesAsync();
