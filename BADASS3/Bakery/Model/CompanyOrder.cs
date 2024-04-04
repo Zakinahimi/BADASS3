@@ -14,7 +14,6 @@ namespace Bakery.Model
         [Key]
         public int CompanyOrderID { get; set; }
 
-
         //REQUIRED
         [Required]
         public int Quantity { get; set; }

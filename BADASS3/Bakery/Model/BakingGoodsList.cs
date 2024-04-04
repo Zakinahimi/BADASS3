@@ -19,7 +19,6 @@ namespace Bakery.Model
         public int RecipeID { get; set; }
         public virtual Recipe Recipes { get; set; }
 
-
         //REQUIRED
         [Required]
         public int Quantity { get; set; }
