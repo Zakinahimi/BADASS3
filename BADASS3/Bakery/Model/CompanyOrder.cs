@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bakery.Model
 {
@@ -11,11 +12,11 @@ namespace Bakery.Model
     {
         //PRIMARY
         [Key]
-        public int CompanyOrderId { get; set; }
+        public int CompanyOrderID { get; set; }
 
 
         //REQUIRED
-        [Required] 
+        [Required]
         public int Quantity { get; set; }
 
         [Required]
@@ -23,8 +24,8 @@ namespace Bakery.Model
 
 
         //ICollection
-        public ICollection<Supermarket> Supermarkets { get; set; }
-        public ICollection<CompanyOrder> CompanyOrders { get; set; }
-        public ICollection<SpreadSheet> SpreadSheetss { get; set; }
+        public ICollection<Supermarket> Supermarket { get; set; }
+        public ICollection<CompanyOrder> CompanyOrder { get; set; }
+        public ICollection<SpreadSheet> SpreadSheet { get; set; }
     }
 }

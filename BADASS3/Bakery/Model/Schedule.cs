@@ -1,11 +1,10 @@
-﻿using Bakery.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bakery.Model
 {
@@ -18,12 +17,12 @@ namespace Bakery.Model
         //FOREIGN
         [ForeignKey("BakingGoodsList")]
         public int BakingGoodsListID { get; set; }
-        public virtual BakingGoodsList BakingGoodsList { get; set; }
+        public virtual BakingGoodsList BakingGoodsLists { get; set; }
 
 
         [ForeignKey("Batch")]
         public int BatchID { get; set; }
-        public virtual Batch Batch { get; set; }
+        public virtual Batch Batches { get; set; }
 
 
         [ForeignKey("Ingredient")]

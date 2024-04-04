@@ -1,11 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
-namespace Bakery.DTO;
-
-public class StockDTO
+namespace Bakery.DTO
 {
-    [Required]
-    public string StockID { get; set; }
-    [Required]
-    public int Name { get; set; }
+    public class StockDTO
+    {
+        [Required]
+        public string StockID { get; set; }
+        [Required]
+        public int Name { get; set; }
+    }
+
 }

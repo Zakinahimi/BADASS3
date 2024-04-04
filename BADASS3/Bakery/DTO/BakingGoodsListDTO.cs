@@ -1,14 +1,17 @@
-namespace Bakery.DTO;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-public class BakingGoodsListDTO
+namespace Bakery.DTO
 {
-    [Required]
-    public int BakingGoodsListID { get; set; }
-    [Required]
-    public int Quantity { get; set; }
-    [Required]
-    public string BakingGoods { get; set; }
-    [Required]
-    public int RecipeID { get; set; }
+    public class BakingGoodsListDTO
+    {
+        [Required]
+        public int BakingGoodsListID { get; set; }
+        [Required]
+        public int Quantity { get; set; }
+        [Required]
+        public string BakingGoods { get; set; }
+        [Required]
+        public int RecipeID { get; set; }
+    }
 }
