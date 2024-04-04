@@ -13,7 +13,7 @@ namespace Bakery.Model
     {
         //PRIMARY
         [Key]
-        public int StockId { get; set; }
+        public int StockID { get; set; }
 
 
         //FOREIGN

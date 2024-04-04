@@ -31,13 +31,13 @@ public class BakeryDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<SpreadSheet>()
-            .HasKey(ss => new { ss.SpreadSheetID, ss.CompanyOrderId, ss.IngredientsStockID, ss.BakingGoodsListID });
+            .HasKey(ss => new { ss.SpreadSheetID, ss.CompanyOrderID, ss.IngredientsID, ss.StockID, ss.BakingGoodsListID });
 
         modelBuilder.Entity<Schedule>()
-            .HasKey(s => new { s.ScheduleID, s.BakingGoodsListID, s.IngredientsStockID, s.BatchID });
+            .HasKey(s => new { s.ScheduleID, s.BakingGoodsListID, s.IngredientsID, s.StockID, s.BatchID });
 
         modelBuilder.Entity<Recipe>()
-            .HasKey(r => new { r.BakingGoodsListID, r.IngredientsStockID, r.RecipeID });
+            .HasKey(r => new { r.BakingGoodsListID, r.IngredientsID, r.StockID, r.RecipeID });
     }
 
 }
