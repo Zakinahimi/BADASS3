@@ -63,7 +63,7 @@ namespace Bad3.Controllers
         [HttpGet("GetOrderDetails/{orderId}")]
         public async Task<ActionResult> GetOrderDetails(int orderId)
         {
-            var orderDetails = await _context.Order
+            var orderDetails = await _context.CompanyOrder
                 .Where(o => o.OrderId == orderId)
                 .Include(o => o.Delivery) // Include the delivery to access its address
                 .Select(o => new { Address = o.Delivery.Address, o.OrderDate })
