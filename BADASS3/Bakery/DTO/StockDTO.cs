@@ -6,9 +6,9 @@ namespace Bakery.DTO
     public class StockDTO
     {
         [Required]
-        public string StockID { get; set; }
+        public int StockID { get; set; }
         [Required]
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 
 }
