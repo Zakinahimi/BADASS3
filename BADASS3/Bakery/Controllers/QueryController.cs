@@ -3,7 +3,6 @@ using Bakery.DTO;
 using Bakery.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Bakery.Controllers
 {
@@ -60,33 +59,40 @@ namespace Bad3.Controllers
     public class QueryController : ControllerBase
     {
         // Query 2: Get the address and date for an order
-        [HttpGet("GetOrderDetails/{orderId}")]
-        public async Task<ActionResult> GetOrderDetails(int orderId)
+        private readonly BakeryDbContext _context;
+
+        public QueryController(BakeryDbContext context)
         {
-            var orderDetails = await _context.CompanyOrder
-                .Where(o => o.OrderId == orderId)
-                .Include(o => o.Delivery) // Include the delivery to access its address
-                .Select(o => new { Address = o.Delivery.Address, o.OrderDate })
+            _context = context;
+        }
+
+        [HttpGet("GetOrderDetails/{orderId}")]
+        public async Task<ActionResult> GetOrderDetails(int CompanyOrderId)
+        {
+            var orderDetails = await _context.DispatchSheet
+                .Where(o => o.CompanyOrderID == CompanyOrderId)
+                .Include(o => o.DeliveryPlace) // Include the delivery to access its address
+                .Select(o => new { Address = o.DeliveryPlace, o.DeliveryDate})
                 .FirstOrDefaultAsync();
 
             if (orderDetails == null)
-                return NotFound($"Details not found for order ID: {orderId}");
+                return NotFound($"Details not found for order ID: {CompanyOrderId}");
 
             return Ok(orderDetails);
         }
 
         // Query 3: Get the list of baked goods in an order
         [HttpGet("GetGoodsInOrder/{orderId from GoodsOrder}")]
-        public async Task<ActionResult> GetGoodsInOrder(int orderId)
+        public async Task<ActionResult> GetGoodsInOrder(int CompanyOrderId)
         {
             var goodsList = await _context.CompanyOrder
-                .Where(go => go.OrderId == orderId)
-                .Include(go => go.Goods)
-                .Select(go => new { go.Goods.GoodName, go.Quantity })
+                .Where(go => go.CompanyOrderID == CompanyOrderId)
+                .Include(go => go.BakingGoods)
+                .Select(go => new { go.BakingGoods, go.Quantity })
                 .ToListAsync();
 
             if (goodsList == null || !goodsList.Any())
-                return NotFound($"No goods found for order ID: {orderId}");
+                return NotFound($"No goods found for order ID: {CompanyOrderId}");
 
             return Ok(goodsList);
         }
