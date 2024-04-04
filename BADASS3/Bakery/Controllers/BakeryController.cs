@@ -107,10 +107,10 @@ namespace Bad3.Controllers
             _context.Ingredient.Remove(ingredient);
 
             // see if others are linked to same stock
-            bool hasOtherIngredients = await _context.Ingredient.AnyAsync(i => i.StockId == ingredient.StockId && i.IngredientsID != ingredient.IngredientsID);
+            bool hasOtherIngredients = await _context.Ingredient.AnyAsync(i => i.IngredientsID == ingredient.IngredientsID && i.IngredientsID != ingredient.IngredientsID);
             if (!hasOtherIngredients)
             {
-                var stock = await _context.Stock.FindAsync(ingredient.StockId);
+                var stock = await _context.Stock.FindAsync(ingredient.IngredientsID);
                 if (stock != null)
                 {
                     // delete stock associated with ingredient

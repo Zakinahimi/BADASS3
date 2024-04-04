@@ -23,7 +23,6 @@ namespace Bakery.Model
 
         // public virtual Ingredient Ingredient { get; set; }
 
-
         //REQUIRED
         [Required]
         public string Name { get; set;}
