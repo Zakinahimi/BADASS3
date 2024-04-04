@@ -41,8 +41,8 @@ namespace Bakery.Controllers
         {
             var orderDetails = await _context.CompanyOrder
                 .Where(o => o.CompanyOrderID == CompanyOrderId)
-                .Include(o=> o.DeliveryPlace)
-                .Select(o => new {Address = o.DispatchSheet.DeliveryPlace, o})
+                .Include(o => o.DeliveryPlace)
+                .Select(o => new { Address = o.DispatchSheet.DeliveryPlace, o })
                 .FirstOrDefaultAsync();
 
             if (orderDetails == null)
