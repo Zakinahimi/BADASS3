@@ -21,7 +21,6 @@ namespace Bakery.Model
         [Required]
         public string BakingGoods { get; set; }
 
-
         //ICollection
         public ICollection<Supermarket> Supermarkets { get; set; }
         public ICollection<CompanyOrder> CompanyOrders { get; set; }

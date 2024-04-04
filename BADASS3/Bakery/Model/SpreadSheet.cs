@@ -27,5 +27,8 @@ namespace Bakery.Model
         public int BakingGoodsListID { get; set; }
         public BakingGoodsList BakingGoodsLists { get; set; }
 
+        [Required]
+        public int Quantity { get; set; }
+
     }
 }
