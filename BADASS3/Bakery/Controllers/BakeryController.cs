@@ -35,7 +35,6 @@ namespace Bad3.Controllers
         return Ok(ingredients);
     }
 
-
         // POST
         [HttpPost("AddIngredient")]
         public async Task<ActionResult> AddIngredient([FromBody] IngredientsDTO ingredientDto)

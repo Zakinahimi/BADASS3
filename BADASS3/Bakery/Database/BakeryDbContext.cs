@@ -7,10 +7,7 @@ namespace Bakery.Database;
 
 public class BakeryDbContext : DbContext
 {
-    public BakeryDbContext(DbContextOptions<BakeryDbContext> options)
-        : base(options)
-    {
-    }
+
     public DbSet<DispatchSheet> DispatchSheet => Set<DispatchSheet>();
     public DbSet<SpreadSheet> SpreadSheet => Set<SpreadSheet>();
     public DbSet<Batch> Batch => Set<Batch>();
@@ -21,7 +18,13 @@ public class BakeryDbContext : DbContext
     public DbSet<Schedule> Schedule => Set<Schedule>();
     public DbSet<Recipe> Recipe => Set<Recipe>();
     public DbSet<Stock> Stock => Set<Stock>();
-
+        
+        
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Data Source=127.0.0.1,1433;Database=BAD_F24;User Id=sa;Password=<makaveli99>;TrustServerCertificate=True");
+    }
+    public BakeryDbContext(DbContextOptions<BakeryDbContext>options) : base(options) { }
 
 
     // SHADOW PROPERTIES
@@ -40,3 +43,4 @@ public class BakeryDbContext : DbContext
             .HasKey(r => new { r.BakingGoodsListID, r.IngredientsID, r.RecipeID });
     }
 }
+
