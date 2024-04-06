@@ -237,7 +237,10 @@ namespace Bakery.Migrations
                     ScheduleID = table.Column<int>(type: "int", nullable: false),
                     BakingGoodsListID = table.Column<int>(type: "int", nullable: false),
                     BatchID = table.Column<int>(type: "int", nullable: false),
-                    IngredientsID = table.Column<int>(type: "int", nullable: false)
+                    IngredientsID = table.Column<int>(type: "int", nullable: false),
+                    BakingGoodsListID1 = table.Column<int>(type: "int", nullable: true),
+                    BatchID1 = table.Column<int>(type: "int", nullable: true),
+                    IngredientsID1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -246,20 +249,33 @@ namespace Bakery.Migrations
                         name: "FK_Schedule_BakingGoodsList_BakingGoodsListID",
                         column: x => x.BakingGoodsListID,
                         principalTable: "BakingGoodsList",
-                        principalColumn: "BakingGoodsListID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BakingGoodsListID");
+                    table.ForeignKey(
+                        name: "FK_Schedule_BakingGoodsList_BakingGoodsListID1",
+                        column: x => x.BakingGoodsListID1,
+                        principalTable: "BakingGoodsList",
+                        principalColumn: "BakingGoodsListID");
                     table.ForeignKey(
                         name: "FK_Schedule_Batch_BatchID",
                         column: x => x.BatchID,
                         principalTable: "Batch",
-                        principalColumn: "BatchID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BatchID");
+                    table.ForeignKey(
+                        name: "FK_Schedule_Batch_BatchID1",
+                        column: x => x.BatchID1,
+                        principalTable: "Batch",
+                        principalColumn: "BatchID");
                     table.ForeignKey(
                         name: "FK_Schedule_Ingredient_IngredientsID",
                         column: x => x.IngredientsID,
                         principalTable: "Ingredient",
                         principalColumn: "IngredientsID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Schedule_Ingredient_IngredientsID1",
+                        column: x => x.IngredientsID1,
+                        principalTable: "Ingredient",
+                        principalColumn: "IngredientsID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -304,14 +320,29 @@ namespace Bakery.Migrations
                 column: "BakingGoodsListID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Schedule_BakingGoodsListID1",
+                table: "Schedule",
+                column: "BakingGoodsListID1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedule_BatchID",
                 table: "Schedule",
                 column: "BatchID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Schedule_BatchID1",
+                table: "Schedule",
+                column: "BatchID1");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedule_IngredientsID",
                 table: "Schedule",
                 column: "IngredientsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schedule_IngredientsID1",
+                table: "Schedule",
+                column: "IngredientsID1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SpreadSheet_BakingGoodsListID",

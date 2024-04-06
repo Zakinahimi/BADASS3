@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.Migrations
 {
     [DbContext(typeof(BakeryDbContext))]
-    [Migration("20240405170548_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240406164231_Allergen")]
+    partial class Allergen
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,13 +200,28 @@ namespace Bakery.Migrations
                     b.Property<int>("BatchID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BakingGoodsListID1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BatchID1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IngredientsID1")
+                        .HasColumnType("int");
+
                     b.HasKey("ScheduleID", "BakingGoodsListID", "IngredientsID", "BatchID");
 
                     b.HasIndex("BakingGoodsListID");
 
+                    b.HasIndex("BakingGoodsListID1");
+
                     b.HasIndex("BatchID");
 
+                    b.HasIndex("BatchID1");
+
                     b.HasIndex("IngredientsID");
+
+                    b.HasIndex("IngredientsID1");
 
                     b.ToTable("Schedule");
                 });
@@ -355,22 +370,34 @@ namespace Bakery.Migrations
             modelBuilder.Entity("Bakery.Model.Schedule", b =>
                 {
                     b.HasOne("Bakery.Model.BakingGoodsList", "BakingGoodsLists")
-                        .WithMany("Schedules")
+                        .WithMany()
                         .HasForeignKey("BakingGoodsListID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Bakery.Model.BakingGoodsList", null)
+                        .WithMany("Schedules")
+                        .HasForeignKey("BakingGoodsListID1");
 
                     b.HasOne("Bakery.Model.Batch", "Batches")
-                        .WithMany("Schedules")
+                        .WithMany()
                         .HasForeignKey("BatchID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Bakery.Model.Ingredient", "Ingredients")
+                    b.HasOne("Bakery.Model.Batch", null)
                         .WithMany("Schedules")
+                        .HasForeignKey("BatchID1");
+
+                    b.HasOne("Bakery.Model.Ingredient", "Ingredients")
+                        .WithMany()
                         .HasForeignKey("IngredientsID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Bakery.Model.Ingredient", null)
+                        .WithMany("Schedules")
+                        .HasForeignKey("IngredientsID1");
 
                     b.Navigation("BakingGoodsLists");
 

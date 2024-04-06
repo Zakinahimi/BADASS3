@@ -7,7 +7,6 @@ namespace Bakery.Database;
 
 public class BakeryDbContext : DbContext
 {
-
     public DbSet<DispatchSheet> DispatchSheet => Set<DispatchSheet>();
     public DbSet<SpreadSheet> SpreadSheet => Set<SpreadSheet>();
     public DbSet<Batch> Batch => Set<Batch>();
@@ -22,7 +21,7 @@ public class BakeryDbContext : DbContext
         
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source=127.0.0.1,1433;Database=BAD_F24;User Id=sa;Password=<makaveli99>;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Data Source=127.0.0.1,1433;Database=BADASS3;User Id=sa;Password=<makaveli99>;TrustServerCertificate=True");
     }
     public BakeryDbContext(DbContextOptions<BakeryDbContext>options) : base(options) { }
 
@@ -39,8 +38,27 @@ public class BakeryDbContext : DbContext
         modelBuilder.Entity<Schedule>()
             .HasKey(s => new { s.ScheduleID, s.BakingGoodsListID, s.IngredientsID, s.BatchID });
 
+        modelBuilder.Entity<Schedule>()
+            .HasOne(s => s.BakingGoodsLists)
+            .WithMany()
+            .HasForeignKey(s => s.BakingGoodsListID)
+            .OnDelete(DeleteBehavior.NoAction); // NO ACTION HUSK HUSK HUSK
+
+        modelBuilder.Entity<Schedule>()
+            .HasOne(s => s.Batches)
+            .WithMany()
+            .HasForeignKey(s => s.BatchID)
+            .OnDelete(DeleteBehavior.NoAction); // NO ACTION HUSK HUSK HUSK
+
+        modelBuilder.Entity<Schedule>()
+            .HasOne(s => s.Ingredients)
+            .WithMany()
+            .HasForeignKey(s => s.IngredientsID)
+            .OnDelete(DeleteBehavior.Cascade); // bLIVER BEHOLDT SOM CASCADE FOR  AT SLETTE INGREDIENSER
+
         modelBuilder.Entity<Recipe>()
             .HasKey(r => new { r.BakingGoodsListID, r.IngredientsID, r.RecipeID });
     }
+
 }
 
